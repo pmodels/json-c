@@ -1368,7 +1368,7 @@ static int json_object_copy_serializer_data(struct json_object *src, struct json
  *
  * This always returns -1 or 1.  It will never return 2 since it does not copy the serializer.
  */
-int json_c_shallow_copy_default(json_object *src, json_object *parent, const char *key, size_t index, json_object **dst)
+int json_c_shallow_copy_default(json_object *src, json_object *parent, const char *key, size_t idx, json_object **dst)
 {
 	switch (src->o_type) {
 	case json_type_boolean:
