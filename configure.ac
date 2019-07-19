@@ -4,6 +4,7 @@ AC_PREREQ(2.64)
 AC_INIT([json-c], 0.13.99, [json-c@googlegroups.com])
 
 AM_INIT_AUTOMAKE
+AM_MAINTAINER_MODE([disable])
 
 AC_CONFIG_MACRO_DIRS([autoconf-archive/m4])
 
