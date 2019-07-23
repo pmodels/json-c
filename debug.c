@@ -46,12 +46,7 @@ void mc_debug(const char *msg, ...)
   va_list ap;
   if(_debug) {
     va_start(ap, msg);
-#if HAVE_VSYSLOG
-    if(_syslog) {
-		vsyslog(LOG_DEBUG, msg, ap);
-	} else
-#endif
-		vprintf(msg, ap);
+    vprintf(msg, ap);
     va_end(ap);
   }
 }
@@ -60,12 +55,7 @@ void mc_error(const char *msg, ...)
 {
   va_list ap;
   va_start(ap, msg);
-#if HAVE_VSYSLOG
-    if(_syslog) {
-		vsyslog(LOG_ERR, msg, ap);
-	} else
-#endif
-		vfprintf(stderr, msg, ap);
+  vfprintf(stderr, msg, ap);
   va_end(ap);
 }
 
@@ -73,11 +63,6 @@ void mc_info(const char *msg, ...)
 {
   va_list ap;
   va_start(ap, msg);
-#if HAVE_VSYSLOG
-    if(_syslog) {
-		vsyslog(LOG_INFO, msg, ap);
-	} else
-#endif
-		vfprintf(stderr, msg, ap);
+  vfprintf(stderr, msg, ap);
   va_end(ap);
 }
