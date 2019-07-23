@@ -144,7 +144,7 @@ static int has_dev_urandom(void)
     if (stat(dev_random_file, &buf)) {
         return 0;
     }
-    return ((buf.st_mode & S_IFCHR) != 0);
+    return (S_ISCHR(buf.st_mode) != 0);
 }
 
 
