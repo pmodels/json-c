@@ -75,7 +75,7 @@ AS_IF([test "x$ac_cv___thread" != xno],
 AC_FUNC_VPRINTF
 AC_FUNC_MEMCMP
 AC_CHECK_FUNCS([realloc])
-AC_CHECK_FUNCS(strcasecmp strdup strerror snprintf vsnprintf vasprintf open strncasecmp setlocale)
+AC_CHECK_FUNCS(strcasecmp strdup strerror snprintf vsnprintf open strncasecmp setlocale)
 AC_CHECK_DECLS([INFINITY], [], [], [[#include <math.h>]])
 AC_CHECK_DECLS([nan], [], [], [[#include <math.h>]])
 AC_CHECK_DECLS([isnan], [], [], [[#include <math.h>]])
