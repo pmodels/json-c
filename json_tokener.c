@@ -23,6 +23,7 @@
 #include <stddef.h>
 #include <ctype.h>
 #include <string.h>
+#include <strings.h>
 #include <limits.h>
 
 #include "debug.h"
