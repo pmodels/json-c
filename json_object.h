@@ -17,8 +17,16 @@
 #ifndef _json_object_h_
 #define _json_object_h_
 
+#if !defined ATTRIBUTE
+#if defined HAVE_GCC_ATTRIBUTE
+#define ATTRIBUTE(a_) __attribute__(a_)
+#else /* HAVE_GCC_ATTRIBUTE */
+#define ATTRIBUTE(a_)
+#endif /* HAVE_GCC_ATTRIBUTE */
+#endif /* ATTRIBUTE */
+
 #ifdef __GNUC__
-#define THIS_FUNCTION_IS_DEPRECATED(func) func __attribute__ ((deprecated))
+#define THIS_FUNCTION_IS_DEPRECATED(func) func ATTRIBUTE((deprecated))
 #elif defined(_MSC_VER)
 #define THIS_FUNCTION_IS_DEPRECATED(func) __declspec(deprecated) func
 #elif defined(__clang__)
@@ -28,7 +36,7 @@
 #endif
 
 #ifdef __GNUC__
-#define JSON_C_CONST_FUNCTION(func) func __attribute__((const))
+#define JSON_C_CONST_FUNCTION(func) func ATTRIBUTE((const))
 #else
 #define JSON_C_CONST_FUNCTION(func) func
 #endif
@@ -510,11 +518,9 @@ JSON_EXPORT void json_object_object_del(struct json_object* obj, const char *key
  * @param val the local name for the json_object* object variable defined in
  *            the body
  */
-#if defined(__GNUC__) && !defined(__STRICT_ANSI__) && __STDC_VERSION__ >= 199901L
-
 # define json_object_object_foreach(obj,key,val) \
 	char *key = NULL; \
-	struct json_object *val __attribute__((__unused__)) = NULL; \
+	struct json_object *val ATTRIBUTE((__unused__)) = NULL; \
 	for(struct lh_entry *entry ## key = json_object_get_object(obj)->head, *entry_next ## key = NULL; \
 		({ if(entry ## key) { \
 			key = (char*)lh_entry_k(entry ## key); \
@@ -522,23 +528,6 @@ JSON_EXPORT void json_object_object_del(struct json_object* obj, const char *key
 			entry_next ## key = entry ## key->next; \
 		} ; entry ## key; }); \
 		entry ## key = entry_next ## key )
-
-#else /* ANSI C or MSC */
-
-# define json_object_object_foreach(obj,key,val) \
-	char *key = NULL;\
-	struct json_object *val = NULL; \
-	struct lh_entry *entry ## key; \
-	struct lh_entry *entry_next ## key = NULL; \
-	for(entry ## key = json_object_get_object(obj)->head; \
-		(entry ## key ? ( \
-			key = (char*)lh_entry_k(entry ## key), \
-			val = (struct json_object*)lh_entry_v(entry ## key), \
-			entry_next ## key = entry ## key->next, \
-			entry ## key) : 0); \
-		entry ## key = entry_next ## key)
-
-#endif /* defined(__GNUC__) && !defined(__STRICT_ANSI__) && __STDC_VERSION__ >= 199901L */
 
 /** Iterate through all keys and values of an object (ANSI C Safe)
  * @param obj the json_object instance

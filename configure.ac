@@ -178,6 +178,8 @@ for flag in -Wall -Wcast-qual -Wno-error=deprecated-declarations \
     PAC_C_CHECK_COMPILER_OPTION([$flag],[CFLAGS="$CFLAGS $flag"])
 done
 
+PAC_C_GNU_ATTRIBUTE
+
 AC_LANG_PUSH([C])
 AC_MSG_CHECKING([for compatibility with _REENTRANT and toolchain headers])
 AC_LINK_IFELSE(
