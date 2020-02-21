@@ -168,11 +168,15 @@ AC_SUBST(JSON_BSYMBOLIC_LDFLAGS)
 AC_ARG_ENABLE([werror],
     AS_HELP_STRING([--disable-werror], [avoid treating compiler warnings as fatal errors]))
 
-AS_IF([test "x$enable_werror" != "xno"], [AX_APPEND_COMPILE_FLAGS([-Werror])])
+if test "x$enable_werror" != "xno" ; then
+    PAC_C_CHECK_COMPILER_OPTION([-Werror],[CFLAGS="$CFLAGS -Werror"])
+fi
 
-AX_APPEND_COMPILE_FLAGS([-Wall -Wcast-qual -Wno-error=deprecated-declarations])
-AX_APPEND_COMPILE_FLAGS([-Wextra -Wwrite-strings -Wno-unused-parameter])
-AX_APPEND_COMPILE_FLAGS([-D_GNU_SOURCE])
+for flag in -Wall -Wcast-qual -Wno-error=deprecated-declarations \
+    -Wextra -Wwrite-strings -Wno-unused-parameter \
+    -D_GNU_SOURCE ; do
+    PAC_C_CHECK_COMPILER_OPTION([$flag],[CFLAGS="$CFLAGS $flag"])
+done
 
 AC_LANG_PUSH([C])
 AC_MSG_CHECKING([for compatibility with _REENTRANT and toolchain headers])
@@ -188,18 +192,17 @@ int main ()
 }
 ]])], [
     AC_MSG_RESULT(yes)
-    AX_APPEND_COMPILE_FLAGS([-D_REENTRANT])
+    CFLAGS="$CFLAGS -D_REENTRANT"
 ], [
     AC_MSG_RESULT(no)
 ])
 AC_LANG_POP([C])
 
-
-AX_COMPILE_CHECK_SIZEOF(int)
-AX_COMPILE_CHECK_SIZEOF(long)
-AX_COMPILE_CHECK_SIZEOF(long long)
-AX_COMPILE_CHECK_SIZEOF(size_t, [#include <stdint.h>])
-AX_COMPILE_CHECK_SIZEOF(int64_t, [#include <stdint.h>])
+AC_CHECK_SIZEOF(int)
+AC_CHECK_SIZEOF(long)
+AC_CHECK_SIZEOF(long long)
+AC_CHECK_SIZEOF(size_t, [#include <stdint.h>])
+AC_CHECK_SIZEOF(int64_t, [#include <stdint.h>])
 
 AC_CONFIG_FILES([
 Makefile

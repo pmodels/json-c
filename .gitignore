@@ -77,7 +77,11 @@
 .deps/
 .libs/
 /aclocal.m4
-/autoconf-archive
+/autoconf-archive/m4/libtool.m4
+/autoconf-archive/m4/ltoptions.m4
+/autoconf-archive/m4/ltsugar.m4
+/autoconf-archive/m4/ltversion.m4
+/autoconf-archive/m4/lt~obsolete.m4
 /autom4te.cache
 /config.guess
 /config.h.in
