@@ -12,7 +12,7 @@ dist-hook:
 
 SUBDIRS = . tests
 
-lib_LTLIBRARIES = libjson-c.la
+noinst_LTLIBRARIES = libjson-c.la
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = json-c.pc
