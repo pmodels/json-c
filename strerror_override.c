@@ -9,8 +9,7 @@ static struct {
 	int errno_value;
 	const char *errno_str;
 } errno_list[] = {
-#define STRINGIFY(x) #x
-#define ENTRY(x) {x, &STRINGIFY(undef_ ## x)[6]}
+#define ENTRY(x) {x, #x}
 	ENTRY(EPERM),
 	ENTRY(ENOENT),
 	ENTRY(ESRCH),
