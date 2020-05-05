@@ -1,6 +1,6 @@
 /* Copyright (C) 2016 by Rainer Gerhards 
  * Released under ASL 2.0 */
-#include "config.h"
+#include "json_c_config.h"
 #include <stdio.h>
 #include "json_object.h"
 #include "json_tokener.h"

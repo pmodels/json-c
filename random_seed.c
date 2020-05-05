@@ -11,7 +11,7 @@
 
 #include "strerror_override.h"
 #include <stdio.h>
-#include "config.h"
+#include "json_c_config.h"
 #include "random_seed.h"
 
 #define DEBUG_SEED(s)
@@ -128,9 +128,9 @@ retry:
 
 #include <string.h>
 #include <fcntl.h>
-#if HAVE_UNISTD_H
+#if JSON_C_HAVE_UNISTD_H
 # include <unistd.h>
-#endif /* HAVE_UNISTD_H */
+#endif /* JSON_C_HAVE_UNISTD_H */
 #include <stdlib.h>
 #include <sys/stat.h>
 

@@ -9,25 +9,25 @@
  *
  */
 
-#include "config.h"
+#include "json_c_config.h"
 
 #include <limits.h>
 
-#ifdef STDC_HEADERS
+#ifdef JSON_C_STDC_HEADERS
 # include <stdlib.h>
 # include <string.h>
-#endif /* STDC_HEADERS */
+#endif /* JSON_C_STDC_HEADERS */
 
-#if defined(HAVE_STRINGS_H) && !defined(_STRING_H) && !defined(__USE_BSD)
+#if defined(JSON_C_HAVE_STRINGS_H) && !defined(_STRING_H) && !defined(__USE_BSD)
 # include <strings.h>
-#endif /* HAVE_STRINGS_H */
+#endif /* JSON_C_HAVE_STRINGS_H */
 
 #ifndef SIZE_T_MAX
-#if SIZEOF_SIZE_T == SIZEOF_INT
+#if JSON_C_SIZEOF_SIZE_T == JSON_C_SIZEOF_INT
 #define SIZE_T_MAX UINT_MAX
-#elif SIZEOF_SIZE_T == SIZEOF_LONG
+#elif JSON_C_SIZEOF_SIZE_T == JSON_C_SIZEOF_LONG
 #define SIZE_T_MAX ULONG_MAX
-#elif SIZEOF_SIZE_T == SIZEOF_LONG_LONG
+#elif JSON_C_SIZEOF_SIZE_T == JSON_C_SIZEOF_LONG_LONG
 #define SIZE_T_MAX ULLONG_MAX
 #else
 #error Unable to determine size of size_t

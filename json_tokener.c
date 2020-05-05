@@ -13,7 +13,7 @@
  * (http://www.opensource.org/licenses/mit-license.php)
  */
 
-#include "config.h"
+#include "json_c_config.h"
 
 #include <assert.h>
 #include <math.h>
@@ -36,21 +36,21 @@
 #include "json_util.h"
 #include "strdup_compat.h"
 
-#ifdef HAVE_LOCALE_H
+#ifdef JSON_C_HAVE_LOCALE_H
 #include <locale.h>
-#endif /* HAVE_LOCALE_H */
-#ifdef HAVE_XLOCALE_H
+#endif /* JSON_C_HAVE_LOCALE_H */
+#ifdef JSON_C_HAVE_XLOCALE_H
 #include <xlocale.h>
 #endif
 
 #define jt_hexdigit(x) (((x) <= '9') ? (x) - '0' : ((x) & 7) + 9)
 
-#if !HAVE_STRNCASECMP && defined(_MSC_VER)
+#if !JSON_C_HAVE_STRNCASECMP && defined(_MSC_VER)
   /* MSC has the version as _strnicmp */
 # define strncasecmp _strnicmp
-#elif !HAVE_STRNCASECMP
+#elif !JSON_C_HAVE_STRNCASECMP
 # error You do not have strncasecmp on your system.
-#endif /* HAVE_STRNCASECMP */
+#endif /* JSON_C_HAVE_STRNCASECMP */
 
 /* Use C99 NAN by default; if not available, nan("") should work too. */
 #ifndef NAN
@@ -251,10 +251,10 @@ struct json_object* json_tokener_parse_ex(struct json_tokener *tok,
   unsigned int nBytes = 0;
   unsigned int *nBytesp = &nBytes;
 
-#ifdef HAVE_USELOCALE
+#ifdef JSON_C_HAVE_USELOCALE
   locale_t oldlocale = uselocale(NULL);
   locale_t newloc;
-#elif defined(HAVE_SETLOCALE)
+#elif defined(JSON_C_HAVE_SETLOCALE)
   char *oldlocale = NULL;
 #endif
 
@@ -271,7 +271,7 @@ struct json_object* json_tokener_parse_ex(struct json_tokener *tok,
     return NULL;
   }
 
-#ifdef HAVE_USELOCALE
+#ifdef JSON_C_HAVE_USELOCALE
   {
     locale_t duploc = duplocale(oldlocale);
     newloc = newlocale(LC_NUMERIC_MASK, "C", duploc);
@@ -282,7 +282,7 @@ struct json_object* json_tokener_parse_ex(struct json_tokener *tok,
     }
     uselocale(newloc);
   }
-#elif defined(HAVE_SETLOCALE)
+#elif defined(JSON_C_HAVE_SETLOCALE)
   {
     char *tmplocale;
     tmplocale = setlocale(LC_NUMERIC, NULL);
@@ -974,10 +974,10 @@ struct json_object* json_tokener_parse_ex(struct json_tokener *tok,
       tok->err = json_tokener_error_parse_eof;
   }
 
-#ifdef HAVE_USELOCALE
+#ifdef JSON_C_HAVE_USELOCALE
   uselocale(oldlocale);
   freelocale(newloc); 
-#elif defined(HAVE_SETLOCALE)
+#elif defined(JSON_C_HAVE_SETLOCALE)
   setlocale(LC_NUMERIC, oldlocale);
   free(oldlocale);
 #endif

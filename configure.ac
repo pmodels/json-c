@@ -50,6 +50,7 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AM_PROG_CC_C_O
 AC_PROG_CC_C99
 AC_CONFIG_HEADER(config.h)
+AC_CONFIG_COMMANDS([prefix-config],[perl $srcdir/autoconf-archive/m4/cmd_prefix_config_h.pl JSON_C config.h json_c_config.h])
 AC_CONFIG_HEADER(json_config.h)
 AC_HEADER_STDC
 AC_CHECK_HEADERS(fcntl.h limits.h strings.h syslog.h unistd.h [sys/cdefs.h] [sys/param.h] stdarg.h locale.h xlocale.h endian.h)

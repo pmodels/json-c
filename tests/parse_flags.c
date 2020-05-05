@@ -1,4 +1,4 @@
-#include "config.h"
+#include "json_c_config.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -6,11 +6,11 @@
 #include "json.h"
 #include "parse_flags.h"
 
-#if !defined(HAVE_STRCASECMP) && defined(_MSC_VER)
+#if !defined(JSON_C_HAVE_STRCASECMP) && defined(_MSC_VER)
 # define strcasecmp _stricmp
-#elif !defined(HAVE_STRCASECMP)
+#elif !defined(JSON_C_HAVE_STRCASECMP)
 # error You do not have strcasecmp on your system.
-#endif /* HAVE_STRNCASECMP */
+#endif /* JSON_C_HAVE_STRNCASECMP */
 
 static struct {
 	const char *arg;

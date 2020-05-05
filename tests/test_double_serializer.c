@@ -3,7 +3,7 @@
 */
 
 #include <stdio.h>
-#include "config.h"
+#include "json_c_config.h"
 
 #include "json_object.h"
 #include "json_object_private.h"
@@ -45,7 +45,7 @@ int main()
 	if (json_c_set_serialization_double_format("x%0.3fy", JSON_C_OPTION_GLOBAL) < 0)
 		printf("ERROR: json_c_set_serialization_double_format() failed");
 	printf("obj.to_string(with global format)=%s\n", json_object_to_json_string(obj));
-#ifdef HAVE___THREAD
+#ifdef JSON_C_HAVE___THREAD
 	if (json_c_set_serialization_double_format("T%0.2fX", JSON_C_OPTION_THREAD) < 0)
 		printf("ERROR: json_c_set_serialization_double_format() failed");
 	printf("obj.to_string(with thread format)=%s\n", json_object_to_json_string(obj));

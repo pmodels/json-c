@@ -6,7 +6,7 @@
  * @brief Do not use, json-c internal, may be changed or removed at any time.
  */
 
-#include "config.h"
+#include "json_c_config.h"
 #include <errno.h>
 
 #include "json_object.h" /* for JSON_EXPORT */

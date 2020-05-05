@@ -4,22 +4,22 @@
 #include <string.h>
 #include <assert.h>
 
-#include "config.h"
+#include "json_c_config.h"
 #include "json.h"
 #include "json_tokener.h"
 #include "snprintf_compat.h"
 
-#ifdef HAVE_LOCALE_H
+#ifdef JSON_C_HAVE_LOCALE_H
 #include <locale.h>
-#endif /* HAVE_LOCALE_H */
-#ifdef HAVE_XLOCALE_H
+#endif /* JSON_C_HAVE_LOCALE_H */
+#ifdef JSON_C_HAVE_XLOCALE_H
 #include <xlocale.h>
 #endif
 
 int main(int argc, char **argv)
 {
 	json_object *new_obj;
-#ifdef HAVE_SETLOCALE
+#ifdef JSON_C_HAVE_SETLOCALE
 	setlocale(LC_NUMERIC, "de_DE");
 #else
 	printf("No locale\n");
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 		printf("ERROR: Original locale not restored \"%s\" != \"%s\"",
 		       buf1, buf2);
 
-#ifdef HAVE_SETLOCALE
+#ifdef JSON_C_HAVE_SETLOCALE
 	setlocale(LC_NUMERIC, "C");
 #endif
 

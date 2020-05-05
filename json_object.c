@@ -10,7 +10,7 @@
  *
  */
 
-#include "config.h"
+#include "json_c_config.h"
 
 #include "strerror_override.h"
 
@@ -34,7 +34,7 @@
 #include "strdup_compat.h"
 #include "snprintf_compat.h"
 
-#if SIZEOF_LONG_LONG != SIZEOF_INT64_T
+#if JSON_C_SIZEOF_LONG_LONG != JSON_C_SIZEOF_INT64_T
 #error "The long long type isn't 64-bits"
 #endif
 
@@ -174,7 +174,7 @@ struct json_object* json_object_get(struct json_object *jso)
 	// Don't overflow the refcounter.
 	assert(jso->_ref_count < UINT32_MAX);
 
-#if defined(HAVE_ATOMIC_BUILTINS) && defined(ENABLE_THREADING)
+#if defined(JSON_C_HAVE_ATOMIC_BUILTINS) && defined(ENABLE_THREADING)
 	__sync_add_and_fetch(&jso->_ref_count, 1);
 #else
 	++jso->_ref_count;
@@ -192,7 +192,7 @@ int json_object_put(struct json_object *jso)
 	 */
 	assert(jso->_ref_count > 0);
 
-#if defined(HAVE_ATOMIC_BUILTINS) && defined(ENABLE_THREADING)
+#if defined(JSON_C_HAVE_ATOMIC_BUILTINS) && defined(ENABLE_THREADING)
 	/* Note: this only allow the refcount to remain correct
 	 * when multiple threads are adjusting it.  It is still an error 
 	 * for a thread to decrement the refcount if it doesn't "own" it,
@@ -742,9 +742,9 @@ int json_object_int_inc(struct json_object *jso, int64_t val) {
 
 /* json_object_double */
 
-#if defined(HAVE___THREAD)
+#if defined(JSON_C_HAVE___THREAD)
 // i.e. __thread or __declspec(thread)
-static SPEC___THREAD char *tls_serialization_float_format = NULL;
+static JSON_C_SPEC___THREAD char *tls_serialization_float_format = NULL;
 #endif
 static char *global_serialization_float_format = NULL;
 
@@ -752,7 +752,7 @@ int json_c_set_serialization_double_format(const char *double_format, int global
 {
 	if (global_or_thread == JSON_C_OPTION_GLOBAL)
 	{
-#if defined(HAVE___THREAD)
+#if defined(JSON_C_HAVE___THREAD)
 		if (tls_serialization_float_format)
 		{
 			free(tls_serialization_float_format);
@@ -765,7 +765,7 @@ int json_c_set_serialization_double_format(const char *double_format, int global
 	}
 	else if (global_or_thread == JSON_C_OPTION_THREAD)
 	{
-#if defined(HAVE___THREAD)
+#if defined(JSON_C_HAVE___THREAD)
 		if (tls_serialization_float_format)
 		{
 			free(tls_serialization_float_format);
@@ -817,7 +817,7 @@ static int json_object_double_to_json_string_format(struct json_object* jso,
 
 		if (!format)
 		{
-#if defined(HAVE___THREAD)
+#if defined(JSON_C_HAVE___THREAD)
 			if (tls_serialization_float_format)
 				format = tls_serialization_float_format;
 			else

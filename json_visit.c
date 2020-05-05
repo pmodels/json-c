@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#include "config.h"
+#include "json_c_config.h"
 #include "json_inttypes.h"
 #include "json_object.h"
 #include "json_visit.h"

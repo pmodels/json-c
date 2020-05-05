@@ -18,11 +18,11 @@
 #define _json_object_h_
 
 #if !defined ATTRIBUTE
-#if defined HAVE_GCC_ATTRIBUTE
+#if defined JSON_C_HAVE_GCC_ATTRIBUTE
 #define ATTRIBUTE(a_) __attribute__(a_)
-#else /* HAVE_GCC_ATTRIBUTE */
+#else /* JSON_C_HAVE_GCC_ATTRIBUTE */
 #define ATTRIBUTE(a_)
-#endif /* HAVE_GCC_ATTRIBUTE */
+#endif /* JSON_C_HAVE_GCC_ATTRIBUTE */
 #endif /* ATTRIBUTE */
 
 #ifdef __GNUC__

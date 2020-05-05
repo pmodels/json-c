@@ -9,7 +9,7 @@
  *
  */
 
-#include "config.h"
+#include "json_c_config.h"
 #undef realloc
 
 #include "strerror_override.h"
@@ -22,21 +22,21 @@
 #include <string.h>
 #include <ctype.h>
 
-#ifdef HAVE_SYS_TYPES_H
+#ifdef JSON_C_HAVE_SYS_TYPES_H
 #include <sys/types.h>
-#endif /* HAVE_SYS_TYPES_H */
+#endif /* JSON_C_HAVE_SYS_TYPES_H */
 
-#ifdef HAVE_SYS_STAT_H
+#ifdef JSON_C_HAVE_SYS_STAT_H
 #include <sys/stat.h>
-#endif /* HAVE_SYS_STAT_H */
+#endif /* JSON_C_HAVE_SYS_STAT_H */
 
-#ifdef HAVE_FCNTL_H
+#ifdef JSON_C_HAVE_FCNTL_H
 #include <fcntl.h>
-#endif /* HAVE_FCNTL_H */
+#endif /* JSON_C_HAVE_FCNTL_H */
 
-#ifdef HAVE_UNISTD_H
+#ifdef JSON_C_HAVE_UNISTD_H
 # include <unistd.h>
-#endif /* HAVE_UNISTD_H */
+#endif /* JSON_C_HAVE_UNISTD_H */
 
 #ifdef WIN32
 # if MSC_VER < 1800
@@ -48,7 +48,7 @@
 # include <io.h>
 #endif /* defined(WIN32) */
 
-#if !defined(HAVE_OPEN) && defined(WIN32)
+#if !defined(JSON_C_HAVE_OPEN) && defined(WIN32)
 # define open _open
 #endif
 
@@ -231,7 +231,7 @@ int json_parse_int64(const char *buf, int64_t *retval)
 	return ((val == 0 && errno != 0) || (end == buf)) ? 1 : 0;
 }
 
-#ifndef HAVE_REALLOC
+#ifndef JSON_C_HAVE_REALLOC
 void* rpl_realloc(void* p, size_t n)
 {
 	if (n == 0)

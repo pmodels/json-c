@@ -13,17 +13,17 @@
  * (http://www.opensource.org/licenses/mit-license.php)
  */
 
-#include "config.h"
+#include "json_c_config.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef HAVE_STDARG_H
+#ifdef JSON_C_HAVE_STDARG_H
 # include <stdarg.h>
-#else /* !HAVE_STDARG_H */
+#else /* !JSON_C_HAVE_STDARG_H */
 # error Not enough var arg support!
-#endif /* HAVE_STDARG_H */
+#endif /* JSON_C_HAVE_STDARG_H */
 
 #include "debug.h"
 #include "printbuf.h"

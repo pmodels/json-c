@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "config.h"
+#include "json_c_config.h"
 
 #include "json_inttypes.h"
 #include "json_util.h"
