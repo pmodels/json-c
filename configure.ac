@@ -174,7 +174,7 @@ fi
 
 for flag in -Wall -Wcast-qual -Wno-error=deprecated-declarations \
     -Wextra -Wwrite-strings -Wno-unused-parameter \
-    -D_GNU_SOURCE ; do
+    -D_GNU_SOURCE -diag-disable=all ; do
     PAC_C_CHECK_COMPILER_OPTION([$flag],[CFLAGS="$CFLAGS $flag"])
 done
 
