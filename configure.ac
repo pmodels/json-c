@@ -11,6 +11,12 @@ AC_PROG_MAKE_SET
 
 AC_CANONICAL_HOST
 
+AC_ARG_ENABLE([embedded],AS_HELP_STRING([--enable-embedded],[enables embedded builds]),,[enable_embedded=no])
+if test x${enable_embedded} = xyes ; then
+    AM_CONDITIONAL([EMBEDDED_BUILD], [test x${enable_embedded} = xyes])
+    PAC_C_CHECK_COMPILER_OPTION([-fvisibility=hidden],[CFLAGS="$CFLAGS -fvisibility=hidden"])
+fi
+
 AC_ARG_ENABLE(threading,
  AS_HELP_STRING([--enable-threading],
    [Enable code to support partly multi-threaded use]),

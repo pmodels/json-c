@@ -12,7 +12,11 @@ dist-hook:
 
 SUBDIRS = . tests
 
+if EMBEDDED_BUILD
 noinst_LTLIBRARIES = libjson-c.la
+else
+lib_LTLIBRARIES = libjson-c.la
+endif !EMBEDDED_BUILD
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = json-c.pc
@@ -43,7 +47,11 @@ noinst_HEADERS=\
 	random_seed.h \
 	strerror_override.h
 
+if EMBEDDED_BUILD
 libjson_c_la_LDFLAGS = -no-undefined @JSON_BSYMBOLIC_LDFLAGS@
+else
+libjson_c_la_LDFLAGS = -version-info 4:0:0 -no-undefined @JSON_BSYMBOLIC_LDFLAGS@
+endif !EMBEDDED_BUILD
 
 libjson_c_la_SOURCES = \
 	arraylist.c \
