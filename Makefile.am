@@ -18,6 +18,9 @@ else
 lib_LTLIBRARIES = libjson-c.la
 endif !EMBEDDED_BUILD
 
+if EMBEDDED_BUILD
+# do not install any pakconfig or headers
+else
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = json-c.pc
 
@@ -37,6 +40,7 @@ libjson_cinclude_HEADERS = \
 	json_visit.h \
 	linkhash.h \
 	printbuf.h
+endif !EMBEDDED_BUILD
 
 noinst_HEADERS=\
 	json_object_private.h \
