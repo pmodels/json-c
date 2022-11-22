@@ -63,7 +63,7 @@ AC_CACHE_CHECK([for __thread support], ac_cv___thread, [dnl
 AC_LINK_IFELSE([dnl
 AC_LANG_PROGRAM([[#undef __thread
 static __thread int a; int foo (int b) { return a + b; }]],
-		[[exit (foo (0));]])],
+		[[return foo (0);]])],
 	       ac_cv___thread=yes, ac_cv___thread=no)
 ])
 AS_IF([test "x$ac_cv___thread" != xno],
